@@ -1,3 +1,11 @@
+// --- 0. Sidebar Toggle Logic (فتح وإغلاق القائمة الجانبية يدوياً) ---
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebarDrawer');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+}
+
 // --- 1. Dark Mode Logic ---
 const themeBtn = document.getElementById('theme-btn');
 const htmlElement = document.documentElement;
@@ -22,7 +30,7 @@ function updateThemeButton(theme) {
     }
 }
 
-// --- 2. Navigation Logic ---
+// --- 2. Navigation Logic (وعند الضغط على أي رابط يتم غلق القائمة تلقائياً على الموبايل) ---
 const navLinks = document.querySelectorAll('.nav-links li');
 const pages = document.querySelectorAll('.page-section');
 
@@ -35,6 +43,11 @@ navLinks.forEach(link => {
         link.classList.add('active');
         const targetId = link.getAttribute('data-target');
         document.getElementById(targetId).classList.add('active-page');
+
+        // غلق القائمة تلقائياً على الشاشات الصغيرة عند التنقل بين الأقسام
+        if (window.innerWidth <= 992) {
+            toggleSidebar();
+        }
     });
 });
 
@@ -89,7 +102,6 @@ setInterval(() => {
     const currentMinutes = String(now.getMinutes()).padStart(2, '0');
     const currentTimeString = `${currentHours}:${currentMinutes}`;
 
-    // التحقق من منبهات الأوقات المدخلة
     const alarmInputs = [
         { id: 'alarm-fajr', name: 'صلاة الفجر 🌙' },
         { id: 'alarm-dhuhr', name: 'صلاة الظهر ☀️' },
@@ -478,6 +490,7 @@ const saveReviewBtn = document.getElementById('save-review-btn');
 const dailyReviewText = document.getElementById('daily-review-text');
 
 saveReviewBtn.addEventListener('click', () => {
+    .trim() === ''
     const review = dailyReviewText.value;
     if (review.trim() === '') {
         alert('يرجى كتابة تقييمك أولاً!');

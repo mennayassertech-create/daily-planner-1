@@ -9,10 +9,21 @@
 </head>
 <body>
 
+    <!-- زر القائمة العائم للهواتف والشاشات الصغيرة -->
+    <button class="menu-toggle-btn" id="menuToggleBtn" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i> القائمة
+    </button>
+
+    <!-- طبقة التعتيم الخلفية عند فتح القائمة -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
     <div class="app-container">
-        <!-- القائمة الجانبية -->
-        <aside class="sidebar">
-            <h2><i class="fa-solid fa-heart"></i> Daily Planner</h2>
+        <!-- القائمة الجانبية (تفتح وتغلق بالزر) -->
+        <aside class="sidebar" id="sidebarDrawer">
+            <div class="drawer-top-row">
+                <h2><i class="fa-solid fa-heart"></i> Daily Planner</h2>
+                <button class="close-sidebar-btn" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
             <ul class="nav-links">
                 <li class="active" data-target="home-section"><a href="#"><i class="fa-solid fa-house"></i> الرئيسية</a></li>
                 <li data-target="daily-section"><a href="#"><i class="fa-solid fa-calendar-day"></i> المهام اليومية</a></li>
@@ -167,7 +178,7 @@
                 </div>
             </div>
 
-            <!-- قسم العبادات والروحانيات (يحتوي الآن على اختيار نوع الروتين) -->
+            <!-- قسم العبادات والروحانيات (يحتوي على اختيار نوع الروتين الإسلامي/المسيحي) -->
             <div id="worship-section" class="page-section">
                 <header class="section-header">
                     <div>
